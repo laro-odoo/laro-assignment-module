@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_batch_view_form_inherited" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.inherited</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="after">
+                <field name="dock_id"/>
+                <field name="vehicle"/>
+                <field name="vehicle_category"/>
+                <field name="weight" invisible="not vehicle_category"/>
+                <field name="weight_percentage" widget='progressbar' invisible="not vehicle_category"/>
+                <field name="volume" invisible="not vehicle_category"/>
+                <field name="volume_percentage" widget='progressbar' invisible="not vehicle_category"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_batch_graph" model="ir.ui.view">
+         <field name="name">stock.picking.batch.graph</field>
+         <field name="model">stock.picking.batch</field>
+         <field name="arch" type="xml">
+             <graph string="Batch Transfers" type="bar" sample="1">
+                 <field name="scheduled_date" interval="day" />
+                 <field name="vehicle_category"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="stock_picking_batch_view_gantt" model="ir.ui.view">
+        <field name="name">stock.picking.batch.view.gantt</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="arch" type="xml">
+            <gantt string="" date_start="scheduled_date" date_stop="scheduled_date">
+                <field name="name" />
+            </gantt>
+        </field>
+    </record>
+
+
+    <record id='stock_picking_batch.stock_picking_batch_action' model="ir.actions.act_window">
+        <field name="res_model">stock.picking.batch</field>
+        <field name="view_mode">tree,kanban,graph,gantt,form</field>
+    </record>
+</odoo>
