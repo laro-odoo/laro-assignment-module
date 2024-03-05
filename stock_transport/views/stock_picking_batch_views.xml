@@ -6,13 +6,19 @@
         <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='scheduled_date']" position="after">
-                <field name="dock_id"/>
-                <field name="vehicle"/>
-                <field name="vehicle_category"/>
-                <field name="weight" invisible="not vehicle_category"/>
-                <field name="weight_percentage" widget='progressbar' invisible="not vehicle_category"/>
-                <field name="volume" invisible="not vehicle_category"/>
-                <field name="volume_percentage" widget='progressbar' invisible="not vehicle_category"/>
+                <field name="dock_id" placeholder='eg. Dock A'/>
+                <field name="vehicle" placeholder='Opel GJ45XC1234'/>
+                <field name="vehicle_category" placeholder='Semi Truck (200kg, 30m³)'/>
+                <label for="weight" string="Weight (kg)" invisible='not vehicle_category'/>
+                <div class="o_row" invisible='not vehicle_category'>
+                    <field name="weight"/>
+                    <field name="weight_percentage" class="oe_inline" widget='progressbar'/>
+                </div>
+                <label for="volume" string="Volume (m³)" invisible='not vehicle_category'/>
+                <div class="o_row" invisible='not vehicle_category'>
+                    <field name="volume"/>
+                    <field name="volume_percentage" class="oe_inline" widget='progressbar'/>
+                </div>
             </xpath>
         </field>
     </record>
@@ -32,12 +38,23 @@
         <field name="name">stock.picking.batch.view.gantt</field>
         <field name="model">stock.picking.batch</field>
         <field name="arch" type="xml">
-            <gantt string="" date_start="scheduled_date" date_stop="scheduled_date">
-                <field name="name" />
+            <gantt 
+            color='id'
+            decoration-info='state=="draft"'
+            decoration-success='state=="done"'
+            date_start="scheduled_date" 
+            date_stop="scheduled_date" 
+            default_group_by='dock_id,vehicle,user_id'
+            thumbnails = "{'user_id': 'image_128'}"
+            default_scale='week'
+            precision="{'day': 'hour:full', 'week': 'day:full', 'month': 'day:full', 'year': 'day:full'}"
+            >
+            <field name='state' invisible='1'/>
+            <field name="name" />
+            <field name="user_id" />
             </gantt>
         </field>
     </record>
-
 
     <record id='stock_picking_batch.stock_picking_batch_action' model="ir.actions.act_window">
         <field name="res_model">stock.picking.batch</field>

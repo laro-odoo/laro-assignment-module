@@ -1,8 +1,8 @@
 {
-    'name': 'Stock Transport',
+    'name': 'Stock Transport Settings',
     'version': '1.0.0',
     # 'category': 'Real Estate/Brokerage',
-    'summary': 'Stock Transport',
+    'summary': 'Stock Transport Settings',
     'description': "",
     'license': 'LGPL-3',
     'author': 'Lakshay Roopchandani',
@@ -13,11 +13,7 @@
     ],
     # data files always loaded at installation
     'data': [
-        'security/ir.model.access.csv',
-
-        'views/fleet_vehicle_model_category_views.xml',
-        'views/stock_picking_batch_views.xml',
-        'views/stock_picking_views.xml',
+        'views/res_config_settings.xml',
     ],
     # 'demo': [
 
