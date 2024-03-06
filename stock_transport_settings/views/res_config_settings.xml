@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//block[@name='shipping_setting_container']" position="inside">
-                    <setting id="delivery_management_system" help="Transport management: organise packs in your fleet, or carriers." title="Shipping connectors allow to compute accurate shipping costs, print shipping labels and request carrier picking at your warehouse to ship to the customer. Apply shipping connector from delivery methods.">
+                    <setting id="delivery_management_system" help="Transport management: organise packs in your fleet, or carriers." title="">
                         <field name="module_stock_transport"/>
                     </setting>
                 </xpath>
